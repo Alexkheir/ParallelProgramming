@@ -1,0 +1,32 @@
+Initialize MPI 
+
+Get the rank of the process(MPI_Comm_Rank)
+Get the total Number of processes(MPI_Comm_Size)
+
+if rank===0;
+	randomly create N elements
+
+share the N elements among all processes(Broadcast)
+chunk_data=distribute data among processes((Scatter) divide the large array into chunks every chunk to a different process)
+
+
+each process sort its chunk_data using any type of algorithm(of course go with the most efficient like quick and merge)
+
+
+Initialize bucket for each process
+for each element in chunk_data:
+	Add the element to the appropriate bucket, based on its value
+
+Create communication between process
+	send data from each process bucket to the corresponding process
+	receive the data for the corresponding process
+
+Sort the received bucket using any type of algorithm(of course go with the most efficient like quick and merge)
+
+
+Gather all the sorted data to the root process from all other processes
+
+If rank ===0
+	Merge the sorted chunks into the final array
+
+Finalize MPI
